@@ -1,0 +1,12 @@
+Libros: 4
+Préstamos: 2
+
+--- LIBROS ---
+1|Cien Años de Soledad|Gabriel García Márquez|9780060883287|True
+2|El Principito|Antoine de Saint-Exupéry|9780156012195|True
+3|1984|George Orwell|9780451524935|False
+4|Don Quijote|Miguel de Cervantes|9788424934484|True
+
+--- PRÉSTAMOS ---
+1|1|Juan Pérez|2025-10-03|True
+3|3|María García|2025-10-03|False
