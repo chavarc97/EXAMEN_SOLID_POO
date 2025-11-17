@@ -56,7 +56,7 @@ class ValidadorBiblioteca:
     """SRP: Solo responsable de VALIDAR datos"""
     
     @staticmethod
-    def validar_libro(titulo: str, autor: str, isbn: str) -> str:
+    def validar_libro(titulo: str, autor: str, isbn: str) -> str | None:
         """Valida datos de libro. Retorna None si es válido, mensaje de error si no."""
         if not titulo or len(titulo) < 2:
             return "Error: Título inválido"
@@ -67,7 +67,7 @@ class ValidadorBiblioteca:
         return None
     
     @staticmethod
-    def validar_usuario(usuario: str) -> str:
+    def validar_usuario(usuario: str) -> str | None:
         """Valida nombre de usuario."""
         if not usuario or len(usuario) < 3:
             return "Error: Nombre de usuario inválido"
@@ -373,14 +373,14 @@ class SistemaBiblioteca:
     
     # ==================== MÉTODOS AUXILIARES ====================
     
-    def _buscar_libro_por_id(self, libro_id: int) -> Libro:
+    def _buscar_libro_por_id(self, libro_id: int) -> Libro | None:
         """Busca un libro por su ID."""
         for libro in self.libros:
             if libro.id == libro_id:
                 return libro
         return None
     
-    def _buscar_prestamo_por_id(self, prestamo_id: int) -> Prestamo:
+    def _buscar_prestamo_por_id(self, prestamo_id: int) -> Prestamo | None:
         """Busca un préstamo por su ID."""
         for prestamo in self.prestamos:
             if prestamo.id == prestamo_id:
@@ -474,7 +474,10 @@ def main():
     print(f"Total activos: {len(activos)}")
     for prestamo in activos:
         libro = sistema._buscar_libro_por_id(prestamo.libro_id)
-        print(f"   - {libro.titulo} → {prestamo.usuario}")
+        if libro is not None:
+            print(f"   - {libro.titulo} → {prestamo.usuario}")
+        else:
+            print(f"   - Libro ID {prestamo.libro_id} no encontrado → {prestamo.usuario}")
     
     # ============ DEVOLUCIÓN ============
     print("\n" + "=" * 70)
